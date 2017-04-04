@@ -1,0 +1,141 @@
+{% extends 'firstone/base.html' %}
+{% load thumbnail %}
+<html>
+<title> PlantsHome</title>
+
+
+{% block content %}
+<body>
+<br><br><br><br>
+
+                 {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+
+     <li>
+    <div class="alert alert-danger" role="alert">{{message}}</div>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+            <div class="col-md-9 col-md-offset-1">
+
+                <div class="thumbnail">
+                    <img class="img-responsive" src="{% thumbnail plant.image1 350x350 crop %}" alt="">
+                    <div class="caption-full">
+                        
+
+                        <h4><a href="#">{{plant.name}}</a>
+                        </h4>
+
+
+  </div>
+
+
+                      <form method="post" action="{%url 'firstone:cart' %}"> {%csrf_token%}
+                          <h4>Price: |{%for i in ratingofplant %}₹{{i.price}} |{%endfor%}</h4>
+                        {%if plant.plantsize_set.all %}<h4>Sizes available:<div class="btn-group" role="group" aria-label="...">
+
+                            {%for pl in plant.plantsize_set.all %}
+  <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{pl.pk}}" />
+                        <label for="choice{{forloop.counter}}">{{pl.size}}</label>
+                            {%endfor%}  </div></h4>{%endif%}
+                        <p class="pull-right"><input type="hidden" name="plantid" value="{{plant.pk}}">
+                    {%if request.user.is_authenticated%}
+                            <input type="submit" class="btn btn-default navbar-btn"  value="Add to Cart" >{%else%}
+                            <button name="login" class="btn btn-default navbar-btn"><a href="{%url 'firstone:login'%}">Please sign in to buy</a></button>
+                            {%endif%}
+</p>
+                        </form>
+
+                        <p>{{plant.description}}</p><br>
+                        <p>Category:{{plant.category}}</p>
+                    </div>
+
+
+
+
+
+                    <div class="ratings">
+                        <p class="pull-right">{{plant.ratingplant_set.count}} reviews</p>
+                        <p>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+
+                        </p>
+                    </div>
+                     <h2> Reviews of {{plant.name}} </h2><br>
+                     {% if plant.ratingplant_set %}
+                {% for rev in plant.ratingplant_set.all %}
+                        <div class="well">
+
+
+                
+               <p>{{rev.foruser.username}}: <br>    {{rev.review}}</p><br><hr>
+                            <p class="pull-right"> {{rev.reviewtime}}</p>
+
+               </div>
+            {% endfor %}
+               {% endif %}
+
+
+
+                <span class="input-group-addon" id="basic-addon1">Write a review of {{plant.name}}</span>
+                <div  class="well " >
+                    <div class="input-group">
+                <form method="post" action=""> {% csrf_token %}
+
+
+
+
+
+
+
+    </div>
+    <!-- /.container -->
+<textarea class="form-control"  name="rev"  placeholder="Share your expierence (login needed)"
+                             {%if not request.user.is_authenticated %}disabled {% endif%}></textarea>
+  					{%if request.user.is_authenticated %}<input type="submit" class="btn btn-default navbar-btn"  value="Submit Review" >{%endif%}
+
+
+                        </div>
+                </div>
+
+
+
+    <div class="container">
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Bodhi.AI</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+
+</body>
+{% endblock %}
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="offcanvas.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+</html>

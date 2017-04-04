@@ -1,0 +1,82 @@
+{% extends 'firstone/base.html' %}
+{% load thumbnail %}
+<html lang="en">
+{% block content %}
+<head>
+
+
+</head>
+
+<br><br><br><br>
+<h1 class="text-center">My Cart</h1>
+<body>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+
+     <li>
+    <div class="alert alert-info" role="alert">{{message}}</div>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+{% for c,p in mix %}
+
+    <div class="container-fluid col-md-3 col-md-offset-1">
+<!--<div class="thumbnail">-->
+      {% if c.photo %}
+        <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <img src="{% thumbnail c.photo 200x200 crop %}" class="text-center"/>
+<!--</div>-->
+      {% endif %}
+        <h3><a href="{{p.get_absolute_url }}" >{{p.name}}</a></h3>
+    <h4>₹{{c.price}}</h4>
+  <p>Size: {{c.size}}</p>
+        <form method="post" action="">{%csrf_token%}
+            <input type="hidden" name="delbutt" value="{{c.id}}">
+  <p><input type="submit" class="btn btn-primary btn-sm"     value="Delete" role="button" /></p>
+            </form>
+
+
+ </div>
+
+{%endfor%}
+ <div class="container-fluid col-md-12 col-md-offset-1">
+     <h3 ><strong>Total :₹ {{total}}</strong></h3>
+     {% if not messages %}
+<form method="post" action="{%url 'firstone:ordersubmit' %}">{%csrf_token%}
+    <input type="hidden" name="cart" value="{{cartids}}">
+    <input type="hidden" name="total" value="{{total}}">
+ <input type="submit" class="btn btn-primary btn-lg"  value="Order" role="button" />
+</form>
+     {%endif%}
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+{%endblock%}
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="offcanvas.js"></script>
+
+</html>

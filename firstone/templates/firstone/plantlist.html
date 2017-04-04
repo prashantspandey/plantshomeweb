@@ -1,0 +1,55 @@
+{% extends 'firstone/base.html' %}
+{% load thumbnail %}
+<html>
+
+<title>
+	PlantsHome| All Plants
+</title>
+
+<head>
+	All Plants
+</head>
+
+<body>
+{% block content %}
+<br/><br/><br/><br>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <script>
+    alert('{{ message }}');
+</script>
+    {% endfor %}
+</ul>
+{% endif %}
+{% for pl in plants %}
+
+
+  <div class="col-sm-4 col-md-4 col-md-offset-0 col-sm-offset-1">
+    <div class="thumbnail small">
+    {% if pl.image1 %}
+      <img src="{% thumbnail pl.image1 300x300 crop %}" class="text-center"/>
+
+      {% endif %}
+      <div class="caption">
+        <h3 class="text-center"><a href="{{pl.get_absolute_url }}">{{pl.name}}</a></h3>
+        <p class="text-center">Scientific Name: {{pl.scientific_name}}</p>
+        <p class="text-center">Category: {{pl.category}}</p>
+        {%if pl.plantsize_set.all %}<p class="text-center">Sizes available: |{% for ps in pl.plantsize_set.all %} {{ps.size}} |	{% endfor%} </p>{%endif%}
+        <p class="text-center">Price:|  {%for ps in pl.plantsize_set.all %} ₹{{ps.price}} |{%endfor%} </p>
+        <p class="text-center"><a href="{{pl.get_absolute_url}}" class="btn btn-primary" role="button">View Details</a> 
+      </div>
+    </div>
+  </div>
+
+
+{%endfor%}
+{% endblock %}
+</body>
+
+
+
+
+
+
+</html>

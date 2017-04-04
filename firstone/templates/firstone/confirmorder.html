@@ -1,0 +1,30 @@
+{%extends 'firstone/base.html'%}
+{% load thumbnail %}
+<html lang="en">
+<head>
+    {%block content%}
+    <meta charset="UTF-8">
+    <title>Ordered!!</title>
+</head>
+<body>
+<br><br><br>
+<div class="row">
+    <div class="col-sm-10 col-md-10 col-md-offset-1">
+        <h1>Congratulations !! You will receive your order within 24 hours.</h1><br><br>
+<div class="well">
+
+<h3>Delivery Address:<strong> {{add}}</strong></h3>
+<h3>PhoneNumber: <strong>{{phone}}</strong></h3>
+    </div>
+        <div class="well">
+{%for c in pname %}
+<p class="h4"> {{c}}</p>
+{%endfor%}
+            <p class="h3"> <strong>₹{{total}}</strong></p>
+            <p>Time: <strong>{{neworder.ordertime}}</strong></p>
+            </div>
+</div>
+    </div>
+</body>
+{%endblock%}
+</html>

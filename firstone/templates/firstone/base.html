@@ -1,0 +1,68 @@
+{% load staticfiles %}
+<html>
+
+<head>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+   <nav class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand {% if athome %} active {%endif%}" href="{% url 'firstone:home' %}">PlantsHome</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav " >
+            <li class="{%if atallplants %}active {%endif%}"><a href="{% url 'firstone:allPlants' %}"><span class="glyphicon glyphicon-leaf"></span> All Plants</a></li>
+            <li><a href="{%url 'firstone:comingsoon'%}">Pots</a></li>
+            <li><a href="{%url 'firstone:comingsoon'%}">Fertilizers</a></li>
+
+          </ul>
+            <form method="get" action="{%url 'firstone:search'%}" class="navbar-form navbar-left">                                          #search form
+        <div class="form-group">
+          <input type="text" name="query" value="{{request.GET.query}}" class="form-control" placeholder="Search Plant/fertilizer etc..">
+        </div>
+        <button type="submit" class="btn btn-default">Search</button>
+      </form>
+           <ul class="nav navbar-nav navbar-center  ">
+               {%if request.user.is_authenticated %}  <p class="navbar-text navbar-right">Welcome: {{request.user.username}}<a href="#" class="navbar-link"></a></p>{%endif%}
+           </ul>
+
+           <ul class="nav navbar-nav navbar-right  ">
+             {%if not request.user.is_authenticated %}<li class="{%if atlogin %}active {%endif%}"><a href="{%url 'firstone:login'%}"> <span class="glyphicon glyphicon-log-in"></span> Log in </a></li>{%endif%}
+               {%if request.user.is_superuser %}<li class="{%if atorders %} active {%endif%}"><a href="{%url 'firstone:vendororder' %}">Delivery Orders</a> </li>{%endif%}
+               {%if request.user.is_superuser %}<li class="{%if atprevorders %} active {%endif%}"><a href="{%url 'firstone:previousorders' %}">Previous Orders</a> </li>{%endif%}
+               {%if request.user.is_authenticated %}<li class="{%if atmyorders %} active {%endif%}"><a href="{%url 'firstone:myorders' %}">My Orders</a> </li>{%endif%}
+           {%if  request.user.is_authenticated %} <li><a href="{%url 'firstone:logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout </a></li>{%endif%}
+           {%if not request.user.is_authenticated %} <li class="{%if atregister %}active{%endif%}"><a href="{% url 'firstone:registeruser' %}"> Register </a></li>{%endif%}
+
+            {% if request.user.is_authenticated %} <li class="{%if atcart %}active{%endif%}"><a href="{%url 'firstone:cart'%}"><span class="glyphicon glyphicon-shopping-cart"></span> My Cart</a></li> {% endif %}
+
+<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+{% block content %}
+{% endblock %}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+</body>
+
+
+</html>

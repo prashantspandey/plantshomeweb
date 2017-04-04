@@ -1,0 +1,115 @@
+{% extends 'firstone/base.html' %}
+
+
+<html lang="en">
+  <head>
+  {% block content %}
+  <meta charset="utf-8">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+
+
+
+    
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="description">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>PlantsHome</title>
+
+
+
+   
+  </head>
+
+  <body>
+   <br><br><br>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+
+            <li role="presentation"><a href="#">About</a></li>
+            <li role="presentation"><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">PlantsHome</h3>
+      </div>
+      {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+      <div class="jumbotron">
+        <h1 class="text-center">PlantsHome</h1>
+        <p class="lead">Now buy your favorite plants from PlantsHome and get them delivered
+        at your doorstep. Choose from 100s of plants and 10s of categories.</p>
+        <p class="text-center"><a class="btn btn-lg btn-success " href="{% url 'firstone:allPlants' %}" role="button">Explore</a></p>
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <h4> <span class="glyphicon glyphicon-leaf" aria-hidden="true"></span> Plants</h4>
+          <p>Choose from 100s of plants from 10s of categories.</p>
+
+          <p class="h4" style="color:blue"><strong>Pots (coming soon)</strong> </p>
+          <p>Pots of different materials and sizes available.</p>
+
+          <p class="h4" style="color:blue"><strong>Decorative Items (coming soon)</strong> </p>
+          <p>From beautiful pebbles to artificial plants.</p>
+        </div>
+
+        <div class="col-lg-6">
+          <p class="h4" style="color:blue"><strong>Fertilizers (coming soon)</strong> </p>
+          <p>Every major fertilizer available.</p>
+
+          <h4>Grass</h4>
+          <p>Multiple variety of grasses available.</p>
+
+          <p class="h4" style="color:blue"><strong>Landscape consultation (coming soon)</strong> </p>
+          <p>Experts who will help you build your garden of dreams.</p>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; Bodhi.AI</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    {% endblock %}
+  </body>
+
+      <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="offcanvas.js"></script>
+
+  
+</html>
+

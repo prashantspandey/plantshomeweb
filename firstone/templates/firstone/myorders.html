@@ -1,0 +1,31 @@
+{% extends 'firstone/base.html' %}
+<html lang="en">
+<head>
+    {%block content%}
+    <meta charset="UTF-8">
+    <title>My Orders</title>
+</head>
+<body>
+<br><br><br>
+<h1>My Orders</h1>
+
+{%for order in orders %}
+
+<div class="well">
+<p class="h3">Name: {{order.username}} </p>
+<p class="h3">PhoneNumber: {{order.phone}}</p>
+<p class="h3">Address :  {{order.address}}</p><br>
+    <p class="h4">Items: <strong>{{order.plnames}} </strong></p>
+<p class="h4">PlantSizes: <strong>{{order.plantsizes}}</strong></p>
+<p class="h4">Total Amount: <strong>₹{{order.total}}</strong></p>
+<p class="h4">Time of order: <strong>{{order.ordertime}}</strong></p>
+    <p class="h4">Status: <strong>{{order.status}}</strong></p>
+
+
+
+
+    </div><hr>
+{%endfor%}
+</body>
+{%endblock%}
+</html>

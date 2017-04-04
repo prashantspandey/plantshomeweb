@@ -1,0 +1,53 @@
+{%extends 'firstone/base.html'%}
+{% load thumbnail %}
+<html lang="en">
+<head>
+    {%block content %}
+    <meta charset="UTF-8">
+    <title>Confirm Order</title>
+    <br><br><br>
+    <h1 class="text-center">Confirm order</h1>
+</head>
+<body>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+
+     <li>
+    <div class="alert alert-danger" role="alert">{{message}}</div>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class="row">
+    <div class="col-md-12 col-md-offset-1">
+<h3>Cost + Delivery charges: ₹{{total}} + ₹{{delcharge}} (10% delivery charges for orders less than ₹1000 )</h3>
+        <h2><strong>Total: ₹{{tbp}}</strong></h2>
+
+
+
+        <div class="well col-md-10" >
+            <p>The order will reach you within 24 hours. <strong> We only operate in Jaipur, Rajasthan India.</strong></p>
+            <p class="h4">We only accept <strong>Cash/PayTm/Card on delivery.</strong></p>
+
+<div class="panel-body">
+ <form class="form-horizontal" action="{%url 'firstone:confirmorder' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  {% include 'firstone/form-template.html' %}
+
+     <div class="form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+  <button type="submit" class="btn btn-success">Confirm Order</button>
+
+  </div>
+
+  </div>
+  </form>
+    </div>
+</div>
+        </div>
+    </div>
+</body>
+{%endblock%}
+</html>

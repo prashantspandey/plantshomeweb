@@ -1,0 +1,45 @@
+{% extends 'firstone/base.html' %}
+<html lang="en">
+<head>
+    {%block content%}
+    <meta charset="UTF-8">
+    <title>Orders To be Delivered</title>
+</head>
+<body>
+<br><br><br>
+<h1>Orders to be delivered</h1>
+
+{%for order in orders %}
+
+<div class="well">
+<p class="h3">Name: {{order.username}} </p>
+<p class="h3">PhoneNumber: {{order.phone}}</p>
+<p class="h3">Address :  {{order.address}}</p><br>
+    <p class="h4">Items: <strong>{{order.plnames}} </strong></p>
+<p class="h4">PlantSizes: <strong>{{order.plantsizes}}</strong></p>
+<p class="h4">Total Amount: <strong>₹{{order.total}}</strong></p>
+<p class="h4">Time of order: <strong>{{order.ordertime}}</strong></p>
+    <p class="h4">Status: <strong>{{order.status}}</strong></p>
+
+
+
+    <form method="post" action="">{%csrf_token%}
+    <input type="hidden" name="orderid" value="{{order.id}}">
+    <input type="hidden" name="confirm" value="confirm">
+ <input type="submit" class="btn btn-primary btn-lg"  value="Confirm Order" role="button" />
+</form>
+        <form method="post" action="">{%csrf_token%}
+    <input type="hidden" name="orderid" value="{{order.id}}">
+    <input type="hidden" name="deliver" value="deliver">
+ <input type="submit" class="btn btn-success btn-lg"  value="Order Delivered" role="button" />
+</form>
+        <form method="post" action="">{%csrf_token%}
+    <input type="hidden" name="orderid" value="{{order.id}}">
+    <input type="hidden" name="cancel" value="cancel">
+ <input type="submit" class="btn btn-danger btn-lg"  value="Cancel Order" role="button" />
+</form>
+    </div><hr>
+{%endfor%}
+</body>
+{%endblock%}
+</html>
